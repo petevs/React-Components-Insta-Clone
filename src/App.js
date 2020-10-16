@@ -5,7 +5,7 @@
 */
 
 // Import the state hook
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // Import the Posts (plural!) and SearchBar components, since they are used inside App component
 import Posts from './components/Posts/Posts.js'
 import SearchBar from './components/SearchBar/SearchBar.js'
@@ -22,9 +22,14 @@ const App = () => {
 
   const handleSearchTerm = event => {
     setSearchTerm(event.target.value);
+  }
+
+  useEffect(() => {
     const results = posts.filter(post => post.username.includes(searchTerm))
     setPosts(results)
-  }
+
+  }, [searchTerm])
+
 
   const likePost = postId => {
     /*
